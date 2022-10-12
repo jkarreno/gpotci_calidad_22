@@ -12,5 +12,15 @@
 	</head>
 	<body>
 		<div class="body"></div>
+		<div class="grad"></div>
+		<div class="header">
+			<div><img src="images/logo.png" border="0"></div>
+		</div>
+		<br>
+		<div class="login">
+				<input type="text" placeholder="Usuario" name="user"><br>
+				<input type="password" placeholder="Contraseña" name="password"><br>
+				<input type="button" value="Ingresar">
+		</div>
 	</body>
 </html>
