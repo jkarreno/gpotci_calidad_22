@@ -1,0 +1,22 @@
+*, html{
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+body{
+	background-color: #d5d4d5;  
+}
+.body{
+	position: absolute;
+	top: -20px;
+	left: -20px;
+	right: -40px;
+	bottom: -40px;
+	width: auto;
+	height: auto;
+	background-image: url('../images/fondo.jpg');
+	background-size: cover;
+    background-position: top center;
+	filter: blur(6px);
+	z-index: 0;
+}
