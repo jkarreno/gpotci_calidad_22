@@ -6,3 +6,6 @@
 
 #archivos error.log
 error_log
+
+#base de datos
+db_daily_backup.sql
