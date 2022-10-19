@@ -43,7 +43,7 @@ include ("funciones.php");
 
 
 </head>
-<body onload="<?php echo permisos(2, 'reservaciones(\''.date("Y-m-d").'\', \'0\', \'0\')');?>; ini()" onkeypress="parar()" onclick="parar()">
+<body onload="<?php echo 'areas(0)';?>; ini()" onkeypress="parar()" onclick="parar()">
 
 	<input type="checkbox" id="check">
 	<header>
