@@ -2,7 +2,7 @@
 //conecto con la base de datos 
 include('conexion.php');
 //Sentencia SQL para buscar un usuario con esos datos 
-$ssql = "SELECT * FROM usuarios WHERE Usuario='".$_POST["user"]."' and Contrasenna='".md5($_POST["pass"])."'"; 
+$ssql = "SELECT * FROM usuarios WHERE Usuario='".$_POST["user"]."' and Contrasena='".$_POST["password"]."'"; 
 
 //Ejecuto la sentencia 
 $rs = mysqli_query($conn, $ssql); 
@@ -17,14 +17,10 @@ if (mysqli_num_rows($rs)!=0){
     session_start(); 
     //session_register("autentificado"); 
     $_SESSION["autentificado"] = "SI"; 
-    $_SESSION["perfil"] = $Rowrs["Perfil"];
     $_SESSION["nombre"] = $Rowrs["Nombre"];
     $_SESSION["Id"] = $Rowrs["Id"];
  //    sesion_register("usuario");
 //    $usuario = $username;
-
-    //bitacora
-    mysqli_query($conn, "INSERT INTO bitacora (FechaHora, IdUser, Hizo) VALUES ('".time()."', '".$_SESSION["Id"]."', '1')");
 	
     header ("Location: principal.php"); 
 	

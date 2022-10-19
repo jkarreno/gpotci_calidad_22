@@ -47,19 +47,19 @@ include ("funciones.php");
 
 	<input type="checkbox" id="check">
 	<header>
-		<div class="menu_bar"><label for="check" id="chk_btn"><i class="fas fa-bars"></i></label></div>
-		<div class="logo_img">Bienvenido <?php echo $_SESSION["nombre"];?>&nbsp;<img src="images/logo.png"></div>
+		<div class="menu_bar" style="width: 100px"><label for="check" id="chk_btn"><i class="fas fa-bars"></i></label></div>
+		<div class="logo_img" style="width: calc(100% - 253px); align-content: "><i class="fa-solid fa-user-tie" style="margin-right: 20px"></i> Bienvenido <?php echo $_SESSION["nombre"];?></div>
+		<div class="logo_img" style="width: 153px"><img src="images/logo.jpg"></div>
 	</header>
 
 	<div class="menu_principal">
-		<div><a href="principal.php"><i class="fas fa-globe"></i></a></div>
-		<?php echo permisos(22, '<div><a href="#" onclick="pacientes()"><i class="fas fa-house-user"></i></a></div>');?>
-		<?php echo permisos(47, '<div><a href="#" onclick="usuarios()"><i class="fas fa-users"></i></a></div>');?>
-		<?php echo permisos(51, '<div><a href="#" onclick="configuracion()"><i class="fas fa-cogs"></i></a></div>');?>
-		<?php echo permisos(99, '<div><a href="#" onclick="estadisticos()"><i class="fas fa-chart-bar"></i></a></div>');?>
-		<?php echo permisos(109, '<div><a href="#" onclick="caja(\''.date ("Y-m-d").'\', \''.date ("Y-m-d").'\')"><i class="fas fa-cash-register"></i></a></div>');?>
-		<?php echo permisos(119, '<div><a href="#" onclick="almacen()"><i class="fas fa-warehouse"></i></a></div>');?>
-		<?php echo permisos(125, '<div><a href="#" onclick="bitacora()"><i class="fas fa-book"></i></a></div>');?>
+		<?php 
+			$ResAreas=mysqli_query($conn, "SELECT * FROM areas ORDER BY Id ASC");
+			while($RResAreas=mysqli_fetch_array($ResAreas))
+			{
+				echo '<div><p style="display: block"><a href="#" onclick="areas(\''.$RResAreas["Id"].'\')"><i class="fa-solid fa-folder-closed" style="margin-right: 10px"></i>'.utf8_encode($RResAreas["Nombre"]).'</a></p></div>';
+			}
+		?>
 		<div><i class="fas fa-sign-out-alt" onclick="location='logout.php'"></i></div>
 	</div>
 
@@ -103,10 +103,11 @@ window.onclick = function(event) {
 }
 
 //funciones ajax
-function pacientes(){
+function areas(area){
 	$.ajax({
 				type: 'POST',
-				url : 'pacientes/pacientes.php'
+				url : 'areas.php',
+				data: 'area=' + area
 	}).done (function ( info ){
 		$('#contenido').html(info);
 	});

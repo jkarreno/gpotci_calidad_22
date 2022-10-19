@@ -18,9 +18,11 @@
 		</div>
 		<br>
 		<div class="login">
+			<form name="flogin" id="flogin" method="POST" action="validausuario.php">
 				<input type="text" placeholder="Usuario" name="user"><br>
 				<input type="password" placeholder="Contraseña" name="password"><br>
-				<input type="button" value="Ingresar">
+				<input type="submit" value="Ingresar">
+			</form>
 		</div>
 	</body>
 </html>
