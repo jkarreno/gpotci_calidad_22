@@ -57,10 +57,11 @@ include ("funciones.php");
 			$ResAreas=mysqli_query($conn, "SELECT * FROM areas ORDER BY Id ASC");
 			while($RResAreas=mysqli_fetch_array($ResAreas))
 			{
-				echo '<div><p style="display: block"><a href="#" onclick="areas(\''.$RResAreas["Id"].'\')"><i class="fa-solid fa-folder-closed" style="margin-right: 10px"></i>'.utf8_encode($RResAreas["Nombre"]).'</a></p></div>';
+				echo '<div><p style="display: block"><a href="#" onclick="area(\''.$RResAreas["Id"].'\')"><i class="fa-solid fa-folder-closed" style="margin-right: 10px"></i>'.utf8_encode($RResAreas["Nombre"]).'</a></p></div>';
 			}
 		?>
-		<div><i class="fas fa-sign-out-alt" onclick="location='logout.php'"></i></div>
+		<div><p style="display: block"><a href="#"><i class="fa-solid fa-screwdriver-wrench"></i> Configuración</a></p></div>
+		<div><p style="display: block"><a href="#"><i class="fas fa-sign-out-alt" onclick="location='logout.php'"></i> Salir</a></p></div>
 	</div>
 
 	<div class="contenido" id="contenido">
@@ -111,82 +112,6 @@ function areas(area){
 		$('#contenido').html(info);
 	});
 
-}
-function configuracion(){
-	$.ajax({
-				type: 'POST',
-				url : 'configuracion/configuracion.php'
-	}).done (function ( info ){
-		$('#contenido').html(info);
-	});
-}
-function servicios(){
-	$.ajax({
-				type: 'POST',
-				url : 'servicios/servicios.php'
-	}).done (function ( info ){
-		$('#contenido').html(info);
-	});
-}
-function usuarios(){
-	$.ajax({
-				type: 'POST',
-				url : 'usuarios/usuarios.php'
-	}).done (function ( info ){
-		$('#contenido').html(info);
-	});
-}	
-function agenda(fecha){
-	$.ajax({
-				type: 'POST',
-				url : 'agenda/agenda.php',
-				data: 'fechacita=' + fecha
-	}).done (function ( info ){
-		$('#contenido').html(info);
-	});
-}	
-function estadisticos(){
-	$.ajax({
-				type: 'POST',
-				url : 'estadisticos/estadisticos.php'
-	}).done (function ( info ){
-		$('#contenido').html(info);
-	});
-}	
-function reservaciones(fecha, habitacion, camas)
-{
-	$.ajax({
-				type: 'POST',
-				url : 'reservaciones/reservaciones.php',
-				data: 'fecha_reservacion=' + fecha + '&habitacion=' + habitacion + '&camas=' + camas
-	}).done (function ( info ){
-		$('#contenido').html(info);
-	});
-}
-function caja(fechaini, fechafin, paciente){
-	$.ajax({
-				type: 'POST',
-				url : 'caja/caja.php',
-				data: 'fechaini=' + fechaini + '&fechafin=' + fechafin
-	}).done (function ( info ){
-		$('#contenido').html(info);
-	});
-}
-function almacen(){
-	$.ajax({
-				type: 'POST',
-				url : 'almacen/almacen.php',
-	}).done (function ( info ){
-		$('#contenido').html(info);
-	});
-}
-function bitacora(){
-	$.ajax({
-				type: 'POST',
-				url : 'bitacora/bitacora.php',
-	}).done (function ( info ){
-		$('#contenido').html(info);
-	});
 }
 
 

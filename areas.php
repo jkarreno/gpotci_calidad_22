@@ -29,3 +29,4 @@ function area(area, categoria){
 	});
 
 }
+</script>

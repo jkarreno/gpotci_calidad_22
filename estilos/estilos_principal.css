@@ -54,6 +54,7 @@ header{
 	z-index: 1;
 	transition: 0.8s;
 	transition-property: left;
+	font-family: Roboto;
 }
 		.menu_principal div{
 			width: 100%;
@@ -65,7 +66,7 @@ header{
 			cursor: pointer;
 			color: #394e79;
 			font-size: 18px;
-			padding: 0 20px;
+			padding: 0 10px;
 		}
 		.menu_principal div:hover{
 			color: #ffffff;

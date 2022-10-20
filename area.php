@@ -2,13 +2,20 @@
 include("conexion.php");
 
 $ResArea=mysqli_fetch_array(mysqli_query($conn, "SELECT Nombre FROM areas WHERE Id='".$_POST["area"]."' LIMIT 1"));
-$ResFiles=mysqli_query($conn, "SELECT * FROM Archivos WHERE Area='".$_POST["area"]."' AND Categoria='".$_POST["categoria"]."' ORDER BY Codigo ASC");
+if($_POST["area"]==0)
+{
+    $ResFiles=mysqli_query($conn, "SELECT * FROM Archivos WHERE Area='".$_POST["area"]."' AND Categoria='".$_POST["categoria"]."' ORDER BY Codigo ASC");
+}
+else
+{
+    $ResFiles=mysqli_query($conn, "SELECT * FROM Archivos WHERE Area='".$_POST["area"]."' ORDER BY Codigo ASC");
+}
 
 $cadena='<div class="c100"">
             <table>
             <thead>
                 <tr>
-                    <th colspan="12" align="center" class="textotitable">'.$ResA["Nombre"].'</td>
+                    <th colspan="12" align="center" class="textotitable">'.utf8_encode($ResArea["Nombre"]).'</td>
                 </tr>
                 <tr>
                     <th align="center" class="textotitable">Codigo</th>
