@@ -106,8 +106,7 @@ window.onclick = function(event) {
 function areas(area){
 	$.ajax({
 				type: 'POST',
-				url : 'areas.php',
-				data: 'area=' + area
+				url : 'areas.php'
 	}).done (function ( info ){
 		$('#contenido').html(info);
 	});
