@@ -66,7 +66,7 @@ include ("funciones.php");
 				echo '<div><p style="display: block"><a href="#" onclick="area(\''.$RResAreas["Id"].'\')"><i class="fa-solid fa-folder-closed" style="margin-right: 10px"></i>'.utf8_encode($RResAreas["Nombre"]).'</a></p></div>';
 			}
 		?>
-		<div><p style="display: block"><a href="#"><i class="fa-solid fa-screwdriver-wrench"></i> Configuración</a></p></div>
+		<div><p style="display: block"><a href="#" onclick="configuracion('0')"><i class="fa-solid fa-screwdriver-wrench"></i> Configuración</a></p></div>
 		<div><p style="display: block"><a href="#"><i class="fas fa-sign-out-alt" onclick="location='logout.php'"></i> Salir</a></p></div>
 	</div>
 
@@ -118,6 +118,16 @@ function areas(area){
 		$('#contenido').html(info);
 	});
 
+}
+
+function configuracion(area){
+	$.ajax({
+				type: 'POST',
+				url : 'config/config.php',
+				data: 'area=' + area
+	}).done (function ( info ){
+		$('#contenido').html(info);
+	});
 }
 
 
