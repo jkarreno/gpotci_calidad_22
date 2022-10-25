@@ -379,6 +379,9 @@ table {
     .liga:hover{
         text-decoration: underline;
     }
+.palabra{
+    color: #0099ff;
+}
 
 /*anuncios*/
 .pub_img{

@@ -48,7 +48,13 @@ include ("funciones.php");
 	<input type="checkbox" id="check">
 	<header>
 		<div class="menu_bar" style="width: 100px"><label for="check" id="chk_btn"><i class="fas fa-bars"></i></label></div>
-		<div class="logo_img" style="width: calc(100% - 253px); align-content: "><i class="fa-solid fa-user-tie" style="margin-right: 20px"></i> Bienvenido <?php echo $_SESSION["nombre"];?></div>
+		<div class="logo_img" style="width: calc(100% - 553px); align-content: "><i class="fa-solid fa-user-tie" style="margin-right: 20px"></i> Bienvenido <?php echo $_SESSION["nombre"];?></div>
+		<div class="logo_img" style="width: 300px">
+			<form id="fbuscar" name="fbuscar" style="display:inline;">
+				<input id="namanyay-search-box" name="q" size="40" type="text" placeholder=""/>
+				<input id="namanyay-search-btn" value="Buscar" type="submit"/>
+			</form>
+		</div>
 		<div class="logo_img" style="width: 153px"><img src="images/logo.jpg"></div>
 	</header>
 
@@ -125,4 +131,22 @@ var bloqueo;
     clearTimeout(bloqueo);
     bloqueo = setTimeout('location="logout.php"', 3120000);
   }
+
+//funcion buscar
+$("#fbuscar").on("submit", function(e){
+	e.preventDefault();
+	var formData = new FormData(document.getElementById("fbuscar"));
+
+	$.ajax({
+		url: "encontrar.php",
+		type: "POST",
+		dataType: "HTML",
+		data: formData,
+		cache: false,
+		contentType: false,
+		processData: false
+	}).done(function(echo){
+		$("#conteni2").html(echo);
+	});
+});
 </script>

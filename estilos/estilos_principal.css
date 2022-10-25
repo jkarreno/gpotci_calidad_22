@@ -114,6 +114,32 @@ label #chk_btn{
 	display: none;
 }
 
+#namanyay-search-btn {
+	background:#0099ff;
+	color:white;
+	font: 'trebuchet ms', trebuchet;
+	padding:10px 20px;
+	border-radius:0 10px 10px 0;
+	-moz-border-radius:0 10px 10px 0;
+	-webkit-border-radius:0 10px 10px 0;
+	-o-border-radius:0 10px 10px 0;
+	border:0 none;
+	font-weight:bold;
+	width:90px !important;
+	height: auto !important;
+}
+
+#namanyay-search-box {
+	background: #eee;
+	padding:10px;
+	border-radius:10px 0 0 10px;
+	-moz-border-radius:10px 0 0 10px;
+	-webkit-border-radius:10px 0 0 10px;
+	-o-border-radius:10px 0 0 10px;
+	border:0 none;
+	width:160px !important;
+}
+
 /*MODAL*/
 	/* The Modal (background) */
 	.modal {
