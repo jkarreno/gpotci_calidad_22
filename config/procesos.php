@@ -9,6 +9,12 @@ if(isset($_POST["hacer"]))
         mysqli_query($conn, "INSERT INTO secciones (Nombre, Tipo, Depende) VALUES ('".$_POST["proceso"]."', 'P', '".$_POST["depende"]."')") or die(mysqli_error($conn));
 
         $mensaje='<div class="mesaje" id="mesaje"><i class="fas fa-thumbs-up"></i> Se agrego el proceso '.$_POST["proceso"].'</div>';
+
+        $ultimo=mysqli_fetch_array(mysqli_query($conn, "SELECT Id FROm secciones ORDER BY Id DESC LIMIT 1"));
+
+        //crea carpeta
+        mkdir("../files/".$ultimo["Id"], 0777, true);
+        chmod("../files/".$ultimo["Id"], 0777);
     }
 }
 
