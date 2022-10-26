@@ -1,9 +1,11 @@
 <?php
 include("../conexion.php");
 
+
 $cadena='<div class="c100" style="display: flex;">
-            <div class="titulos_top" onclick="area(\'0\', \'0\')"><i class="fa-solid fa-folder"></i> Areas</div>
-            <div class="titulos_top" onclick="area(\'0\', \'18\')"><i class="fa-solid fa-folder-open"></i> Categorias</div>
+            <div class="titulos_top" onclick="procesos()"><i class="fa-solid fa-folder"></i> Procesos</div>
+            <div class="titulos_top" onclick="area(\'0\', \'0\')"><i class="fa-solid fa-folder"></i> Categorias</div>
+            <div class="titulos_top" onclick="area(\'0\', \'18\')"><i class="fa-solid fa-file"></i> Archivos</div>
             <div class="titulos_top" onclick="area(\'0\', \'1\')"><i class="fa-solid fa-users"></i> Usuarios</div>
             <div class="titulos_top" onclick="area(\'0\', \'10\')"><i class="fa-solid fa-book"></i> Bitacora</div>
         </div>
@@ -58,3 +60,29 @@ $cadena.='      </tbody>
         </div>';
 
 echo $cadena;
+
+?>
+<script>
+function procesos(){
+	$.ajax({
+				type: 'POST',
+				url : 'config/procesos.php'
+	}).done (function ( info ){
+		$('#conteni2').html(info);
+	});
+}
+function add_proceso(){
+    $.ajax({
+				type: 'POST',
+				url : 'config/add_proceso.php'
+	}).done (function ( info ){
+		$('#conteni2').html(info);
+	});
+}
+
+
+//mostrar mensaje despues de los cambios
+setTimeout(function() { 
+    $('#mesaje').fadeOut('fast'); 
+}, 1000)
+</script>
