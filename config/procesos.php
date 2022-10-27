@@ -30,7 +30,7 @@ if(isset($_POST["hacer"]))
 
         mysqli_query($conn, "DELETE FROM secciones WHERE Id='".$_POST["proceso"]."' AND Tipo='P'");
 
-        $mensaje='<div class="mesaje" id="mesaje"><i class="fas fa-thumbs-up"></i> Se elimino el proceso '.$_POST["proceso"].'</div>';
+        $mensaje='<div class="mesaje" id="mesaje"><i class="fas fa-thumbs-up"></i> Se elimino el proceso '.$ResProceso["Nombre"].'</div>';
 
         $files = glob('../files/'.$_POST["proceso"].'/*'); //obtenemos todos los nombres de los ficheros
         foreach($files as $file){

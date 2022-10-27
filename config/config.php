@@ -4,7 +4,7 @@ include("../conexion.php");
 
 $cadena='<div class="c100" style="display: flex;">
             <div class="titulos_top" onclick="procesos()"><i class="fa-solid fa-folder"></i> Procesos</div>
-            <div class="titulos_top" onclick="area(\'0\', \'0\')"><i class="fa-solid fa-folder"></i> Categorias</div>
+            <div class="titulos_top" onclick="categorias()"><i class="fa-solid fa-folder"></i> Categorias</div>
             <div class="titulos_top" onclick="area(\'0\', \'18\')"><i class="fa-solid fa-file"></i> Archivos</div>
             <div class="titulos_top" onclick="area(\'0\', \'1\')"><i class="fa-solid fa-users"></i> Usuarios</div>
             <div class="titulos_top" onclick="area(\'0\', \'10\')"><i class="fa-solid fa-book"></i> Bitacora</div>
@@ -103,6 +103,50 @@ function del_pro(proceso){
 				type: 'POST',
 				url : 'config/procesos.php',
                 data: 'proceso=' + proceso + '&hacer=delproceso'
+	}).done (function ( info ){
+		$('#conteni2').html(info);
+	});
+}
+//categorias
+function categorias(){
+	$.ajax({
+				type: 'POST',
+				url : 'config/categorias.php'
+	}).done (function ( info ){
+		$('#conteni2').html(info);
+	});
+}
+function add_categoria(){
+    $.ajax({
+				type: 'POST',
+				url : 'config/add_categoria.php'
+	}).done (function ( info ){
+		$('#conteni2').html(info);
+	});
+}
+function edit_categoria(categoria){
+    $.ajax({
+				type: 'POST',
+				url : 'config/edit_categoria.php',
+                data: 'categoria=' + categoria
+	}).done (function ( info ){
+		$('#conteni2').html(info);
+	});
+}
+function dele_categoria(categoria){
+    $.ajax({
+				type: 'POST',
+				url : 'config/dele_categoria.php',
+                data: 'categoria=' + categoria
+	}).done (function ( info ){
+		$('#conteni2').html(info);
+	});
+}
+function del_cat(categoria){
+    $.ajax({
+				type: 'POST',
+				url : 'config/categorias.php',
+                data: 'categoria=' + categoria + '&hacer=delcategoria'
 	}).done (function ( info ){
 		$('#conteni2').html(info);
 	});
