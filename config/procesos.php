@@ -56,12 +56,12 @@ $cadena=$mensaje.'<div class="c100" id="conteni2">
                     </tr>
                 </thead>
                 <tbody>';
-$bgcolor="#ffffff"; $J=1;
-$ResProcesos=mysqli_query($conn, "SELECT * FROM secciones WHERE TIpo='P' ORDER BY Nombre ASC");
+$bgcolor="#ffffff"; $J=1; $T=1000;
+$ResProcesos=mysqli_query($conn, "SELECT * FROM secciones WHERE TIpo='P' AND Depende='0' ORDER BY Nombre ASC");
 while($RResProcesos=mysqli_fetch_array($ResProcesos))
 {
     $cadena.='      <tr style="background: '.$bgcolor.'" id="row_'.$J.'">
-                        <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="left" class="texto" valign="middle">'.$J.'</td>
+                        <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle">'.$J.'</td>
                         <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="left" class="texto" valign="middle">'.$RResProcesos["Nombre"].'</td>
                         <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle"><a href="javascript:void(0)" onclick="edit_proceso(\''.$RResProcesos["Id"].'\')"><i class="fa-solid fa-pen"></i></a></td>
                         <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle"><a href="javascript:void(0)" onclick="dele_proceso(\''.$RResProcesos["Id"].'\')"><i class="fa-solid fa-trash"></i></a></td>
@@ -72,6 +72,24 @@ while($RResProcesos=mysqli_fetch_array($ResProcesos))
 
     $J++;
     
+    $ResSubProcesos=mysqli_query($conn, "SELECT * FROM secciones WHERE Tipo='P' AND Depende='".$RResProcesos["Id"]."' ORDER BY Nombre ASC");
+    if(mysqli_num_rows($ResSubProcesos)>0)
+    {
+        while($RResSP=mysqli_fetch_array($ResSubProcesos))
+        {
+            $cadena.='<tr style="background: '.$bgcolor.'" id="row_'.$T.'">
+                        <td onmouseover="row_'.$T.'.style.background=\'#badad8\'" onmouseout="row_'.$T.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle"></td>
+                        <td onmouseover="row_'.$T.'.style.background=\'#badad8\'" onmouseout="row_'.$T.'.style.background=\''.$bgcolor.'\'" align="left" class="texto" valign="middle"><i class="fa-solid fa-folder-tree itree"></i> '.$RResSP["Nombre"].'</td>
+                        <td onmouseover="row_'.$T.'.style.background=\'#badad8\'" onmouseout="row_'.$T.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle"><a href="javascript:void(0)" onclick="edit_proceso(\''.$RResSP["Id"].'\')"><i class="fa-solid fa-pen"></i></a></td>
+                        <td onmouseover="row_'.$T.'.style.background=\'#badad8\'" onmouseout="row_'.$T.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle"><a href="javascript:void(0)" onclick="dele_proceso(\''.$RResSP["Id"].'\')"><i class="fa-solid fa-trash"></i></a></td>
+                    </tr>';
+
+            if($bgcolor=="#ffffff"){$bgcolor="#cccccc";}
+            elseif($bgcolor=="#cccccc"){$bgcolor="#ffffff";}
+            
+            $T++;
+        }
+    }
 }
 $cadena.='      </tbody>
             </table>
