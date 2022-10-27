@@ -24,6 +24,21 @@ if(isset($_POST["hacer"]))
 
         $mensaje='<div class="mesaje" id="mesaje"><i class="fas fa-thumbs-up"></i> Se actualizo el proceso '.$_POST["proceso"].'</div>';
     }
+    if($_POST["hacer"]=='delproceso')
+    {
+        $ResProceso=mysqli_fetch_array(mysqli_query($conn, "SELECT Nombre FROM secciones WHERE Id='".$_POST["proceso"]."' AND Tipo='P' LIMIT 1"));
+
+        mysqli_query($conn, "DELETE FROM secciones WHERE Id='".$_POST["proceso"]."' AND Tipo='P'");
+
+        $mensaje='<div class="mesaje" id="mesaje"><i class="fas fa-thumbs-up"></i> Se elimino el proceso '.$_POST["proceso"].'</div>';
+
+        $files = glob('../files/'.$_POST["proceso"].'/*'); //obtenemos todos los nombres de los ficheros
+        foreach($files as $file){
+            if(is_file($file))
+            unlink($file); //elimino el fichero
+        }
+        rmdir('../files/'.$_POST["proceso"]);
+    }
 }
 
 
@@ -49,7 +64,7 @@ while($RResProcesos=mysqli_fetch_array($ResProcesos))
                         <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="left" class="texto" valign="middle">'.$J.'</td>
                         <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="left" class="texto" valign="middle">'.$RResProcesos["Nombre"].'</td>
                         <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle"><a href="javascript:void(0)" onclick="edit_proceso(\''.$RResProcesos["Id"].'\')"><i class="fa-solid fa-pen"></i></a></td>
-                        <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle"><i class="fa-solid fa-trash"></i></td>
+                        <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle"><a href="javascript:void(0)" onclick="dele_proceso(\''.$RResProcesos["Id"].'\')"><i class="fa-solid fa-trash"></i></a></td>
                     </tr>';
 
     if($bgcolor=="#ffffff"){$bgcolor="#cccccc";}
@@ -64,3 +79,9 @@ $cadena.='      </tbody>
 
 echo $cadena;
 ?>
+<script>
+//mostrar mensaje despues de los cambios
+setTimeout(function() { 
+    $('#mesaje').fadeOut('fast'); 
+}, 1000)
+</script>

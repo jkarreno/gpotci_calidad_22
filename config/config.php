@@ -63,6 +63,7 @@ echo $cadena;
 
 ?>
 <script>
+//procesos
 function procesos(){
 	$.ajax({
 				type: 'POST',
@@ -88,10 +89,22 @@ function edit_proceso(proceso){
 		$('#conteni2').html(info);
 	});
 }
-
-
-//mostrar mensaje despues de los cambios
-setTimeout(function() { 
-    $('#mesaje').fadeOut('fast'); 
-}, 1000)
+function dele_proceso(proceso){
+    $.ajax({
+				type: 'POST',
+				url : 'config/dele_proceso.php',
+                data: 'proceso=' + proceso
+	}).done (function ( info ){
+		$('#conteni2').html(info);
+	});
+}
+function del_pro(proceso){
+    $.ajax({
+				type: 'POST',
+				url : 'config/procesos.php',
+                data: 'proceso=' + proceso + '&hacer=delproceso'
+	}).done (function ( info ){
+		$('#conteni2').html(info);
+	});
+}
 </script>

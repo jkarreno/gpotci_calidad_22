@@ -159,4 +159,6 @@ $("#fbuscar").on("submit", function(e){
 		$("#conteni2").html(echo);
 	});
 });
+
+
 </script>

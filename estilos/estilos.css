@@ -2,6 +2,12 @@
 i{
     font-size: 25px;
 }
+a.botona{
+    padding: 10px 20px;
+    color: #ffffff;
+    background: #0099ff;
+    border-radius: 5px;
+}
 /*Cards*/
 .maselementos{
     display: none; 
@@ -262,7 +268,7 @@ textarea{
     height: 200px;
 }
 
-input[type="button"]:hover, input[type="submit"]:hover{
+input[type="button"]:hover, input[type="submit"]:hover, a.botona:hover{
     background-color: #394e79;
 }
 
