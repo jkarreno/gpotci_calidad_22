@@ -16,6 +16,14 @@ if(isset($_POST["hacer"]))
         mkdir("../files/".$ultimo["Id"], 0777, true);
         chmod("../files/".$ultimo["Id"], 0777);
     }
+    if($_POST["hacer"]=='editproceso')
+    {
+        mysqli_query($conn, "UPDATE secciones SET Nombre='".$_POST["proceso"]."', 
+                                                    Depende='".$_POST["depende"]."'
+                                            WHERE Id='".$_POST["idproceso"]."' AND Tipo='P'") OR die(mysqli_error($conn));
+
+        $mensaje='<div class="mesaje" id="mesaje"><i class="fas fa-thumbs-up"></i> Se actualizo el proceso '.$_POST["proceso"].'</div>';
+    }
 }
 
 
@@ -40,7 +48,7 @@ while($RResProcesos=mysqli_fetch_array($ResProcesos))
     $cadena.='      <tr style="background: '.$bgcolor.'" id="row_'.$J.'">
                         <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="left" class="texto" valign="middle">'.$J.'</td>
                         <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="left" class="texto" valign="middle">'.$RResProcesos["Nombre"].'</td>
-                        <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle"><i class="fa-solid fa-pen"></i></td>
+                        <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle"><a href="javascript:void(0)" onclick="edit_proceso(\''.$RResProcesos["Id"].'\')"><i class="fa-solid fa-pen"></i></a></td>
                         <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle"><i class="fa-solid fa-trash"></i></td>
                     </tr>';
 
@@ -55,3 +63,4 @@ $cadena.='      </tbody>
         </div>';
 
 echo $cadena;
+?>

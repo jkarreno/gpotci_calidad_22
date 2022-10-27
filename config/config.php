@@ -79,6 +79,15 @@ function add_proceso(){
 		$('#conteni2').html(info);
 	});
 }
+function edit_proceso(proceso){
+    $.ajax({
+				type: 'POST',
+				url : 'config/edit_proceso.php',
+                data: 'proceso=' + proceso
+	}).done (function ( info ){
+		$('#conteni2').html(info);
+	});
+}
 
 
 //mostrar mensaje despues de los cambios
