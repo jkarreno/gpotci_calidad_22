@@ -43,7 +43,7 @@ include ("funciones.php");
 
 
 </head>
-<body onload="<?php echo 'areas(0)';?>; ini()" onkeypress="parar()" onclick="parar()">
+<body onload="<?php echo 'categorias()';?>; ini()" onkeypress="parar()" onclick="parar()">
 
 	<input type="checkbox" id="check">
 	<header>
@@ -63,7 +63,7 @@ include ("funciones.php");
 			$ResProcesos=mysqli_query($conn, "SELECT * FROM secciones WHERE Tipo='P' AND Depende='0' ORDER BY Nombre ASC");
 			while($RResProcesos=mysqli_fetch_array($ResProcesos))
 			{
-				echo '<div><p style="display: block"><a href="#" onclick="area(\''.$RResProcesos["Id"].'\')"><i class="fa-solid fa-folder-closed" style="margin-right: 10px"></i>'.$RResProcesos["Nombre"].'</a></p></div>';
+				echo '<div><p style="display: block"><a href="#" onclick="seccion(\''.$RResProcesos["Id"].'\')"><i class="fa-solid fa-folder-closed" style="margin-right: 10px"></i>'.$RResProcesos["Nombre"].'</a></p></div>';
 			}
 		?>
 		<div><a href="#" onclick="configuracion('0')"><i class="fa-solid fa-screwdriver-wrench"></i> Configuración</a></div>
@@ -110,14 +110,13 @@ window.onclick = function(event) {
 }
 
 //funciones ajax
-function areas(area){
+function categorias(){
 	$.ajax({
 				type: 'POST',
-				url : 'areas.php'
+				url : 'categorias.php'
 	}).done (function ( info ){
 		$('#contenido').html(info);
 	});
-
 }
 
 function configuracion(area){
