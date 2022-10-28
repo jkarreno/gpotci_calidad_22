@@ -118,7 +118,6 @@ function categorias(){
 		$('#contenido').html(info);
 	});
 }
-
 function configuracion(area){
 	$.ajax({
 				type: 'POST',
@@ -126,6 +125,15 @@ function configuracion(area){
 				data: 'area=' + area
 	}).done (function ( info ){
 		$('#contenido').html(info);
+	});
+}
+function seccion(seccion){
+	$.ajax({
+				type: 'POST',
+				url : 'seccion.php',
+				data: 'seccion=' + seccion
+	}).done (function ( info ){
+		$('#conteni2').html(info);
 	});
 }
 

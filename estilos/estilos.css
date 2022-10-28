@@ -23,7 +23,7 @@ a.botona{
     display: flex;
     flex-wrap: wrap;
 }
-    .card h2 {
+    div h2, .card h2 {
         font-size: 20px;
         color: #37b83c;
         display: block;
