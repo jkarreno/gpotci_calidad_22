@@ -167,5 +167,4 @@ $("#fbuscar").on("submit", function(e){
 	});
 });
 
-
 </script>

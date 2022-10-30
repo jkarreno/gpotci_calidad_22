@@ -220,7 +220,7 @@ label #chk_btn{
 		}
 	
 	.modal-body {
-        /*padding: 2px 16px; */
+        padding: 4px 32px; 
 		height: 100%;
 		font-family: 'Roboto', sans-serif;
     }
