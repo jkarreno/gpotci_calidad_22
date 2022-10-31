@@ -3,6 +3,13 @@ include('../conexion.php');
 
 $ResSeccion=mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM secciones WHERE Id='".$_POST["seccion"]."' LIMIT 1"));
 
+if($ResSeccion["Depende"]!=0)
+{
+    $ResSecSup=mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM secciones WHERE Id='".$ResSeccion["Depende"]."' LIMIT 1"));
+
+    $superior=$ResSecSup["Nombre"].' / ';
+}
+
 $mesaje='';
 
 if(isset($_POST["hacer"]))
@@ -50,7 +57,7 @@ if(isset($_POST["hacer"]))
 }
 
 $cadena=$mensaje.'<div class="c100" style="display: flex; flex-wrap:wrap;">
-            <h2>'.$ResSeccion["Nombre"].'</h2>
+            <h2>'.$superior.$ResSeccion["Nombre"].'</h2>
         </div>
         <div class="c100" style="display: flex; flex-wrap: wrap;">
             <table>

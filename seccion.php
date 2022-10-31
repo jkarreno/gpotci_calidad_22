@@ -5,8 +5,15 @@ $ResSeccion=mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM secciones WHER
 
 $ResSubSeccion=mysqli_query($conn, "SELECT * FROM secciones WHERE Depende='".$_POST["seccion"]."' ORDER BY Nombre ASC");
 
+if($ResSeccion["Depende"]!=0)
+{
+    $ResSecSup=mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM secciones WHERE Id='".$ResSeccion["Depende"]."' LIMIT 1"));
+
+    $superior=$ResSecSup["Nombre"].' / ';
+}
+
 $cadena='<div class="c100" style="display: flex; flex-wrap:wrap;">
-            <h2>'.$ResSeccion["Nombre"].'</h2>
+            <h2>'.$superior.$ResSeccion["Nombre"].'</h2>
         </div>';
 //subsecciones
 if(mysqli_num_rows($ResSubSeccion)>0)

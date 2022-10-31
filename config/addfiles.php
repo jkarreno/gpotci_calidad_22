@@ -3,8 +3,15 @@ include("../conexion.php");
 
 $ResSeccion=mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM secciones WHERE Id='".$_POST["seccion"]."' LIMIT 1"));
 
+if($ResSeccion["Depende"]!=0)
+{
+    $ResSecSup=mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM secciones WHERE Id='".$ResSeccion["Depende"]."' LIMIT 1"));
+
+    $superior=$ResSecSup["Nombre"].' / ';
+}
+
 $cadena='<div class="c100" style="display:flex; flex-wrap: wrap;">
-            <h2>Agregar archivo para: '.$ResSeccion["Nombre"].'</h2>
+            <h2>Agregar archivo para: '.$superior.$ResSeccion["Nombre"].'</h2>
         </div>
         
         <form name="fadfile" id="fadfile"  enctype="multipart/form-data">
