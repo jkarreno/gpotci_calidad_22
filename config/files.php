@@ -42,10 +42,10 @@ if(isset($_POST["hacer"]))
         }
         if($copyfile==1)
         {
-            mysqli_query($conn, "INSERT INTO Archivos (Seccion, Codigo, SubCodigo, Nombre, Subtitulo, Url_d, Archivo_r, Extension_r)
+            mysqli_query($conn, "INSERT INTO Archivos (Seccion, Codigo, SubCodigo, Nombre, Subtitulo, Url_d, Archivo_r, Extension_r, FechaUpdate)
                                                 VALUES ('".$_POST["seccion"]."', '".$_POST["codigo"]."', '".$_POST["subcodigo"]."', 
                                                         '".$_POST["titulo"]."', '".$_POST["subtitulo"]."', '".$_POST["dirdocumento"]."', 
-                                                        '".$nombre_archivo_r."', '".$ext_r[1]."')") or die(mysqli_error($conn));
+                                                        '".$nombre_archivo_r."', '".$ext_r[1]."', '".date("Y-m-d")."')") or die(mysqli_error($conn));
 
             $mensaje='<div class="mesaje" id="mesaje"><i class="fas fa-thumbs-up"></i> Se agrego el archivo '.$_POST["titulo"].' satisfactoriamente</div>';
         }
