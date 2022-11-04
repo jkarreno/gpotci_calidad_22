@@ -123,4 +123,13 @@ function addfile(seccion){
 		$('#modal-body').html(info);
 	});
 }
+function edit_file(file){
+	$.ajax({
+				type: 'POST',
+				url : 'config/editfile.php',
+                data: 'file=' + file
+	}).done (function ( info ){
+		$('#modal-body').html(info);
+	});
+}
 </script>

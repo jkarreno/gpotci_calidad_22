@@ -15,7 +15,7 @@ $mesaje='';
 if(isset($_POST["hacer"]))
 {
     //agregar archivo
-    if(isset($_POST["hacer"])=='adfile')
+    if($_POST["hacer"]=='adfile')
     {
         //carga el archivo
         if($_FILES['filer']!='')
@@ -33,26 +33,75 @@ if(isset($_POST["hacer"]))
                 else
                 {
                     $copyfile=2;
+                    $error=', no se pudo cargar el archivo '.$nombre_archivo_r;
                 }
             }
             else
             {
                 $copyfile=3;
+                $error=', no se pudo cargar el archivo '.$nombre_archivo_r;
             }
-        }
-        if($copyfile==1)
-        {
-            mysqli_query($conn, "INSERT INTO Archivos (Seccion, Codigo, SubCodigo, Nombre, Subtitulo, Url_d, Archivo_r, Extension_r, FechaUpdate)
-                                                VALUES ('".$_POST["seccion"]."', '".$_POST["codigo"]."', '".$_POST["subcodigo"]."', 
-                                                        '".$_POST["titulo"]."', '".$_POST["subtitulo"]."', '".$_POST["dirdocumento"]."', 
-                                                        '".$nombre_archivo_r."', '".$ext_r[1]."', '".date("Y-m-d")."')") or die(mysqli_error($conn));
-
-            $mensaje='<div class="mesaje" id="mesaje"><i class="fas fa-thumbs-up"></i> Se agrego el archivo '.$_POST["titulo"].' satisfactoriamente</div>';
         }
         else
         {
-            $mensaje='<div class="mesaje" id="mesaje"><i class="fas fa-exclamation-triangle"></i> Ocurrio un error, no se pudo cargar el archivo, intente nuevamente</div>'; 
+            $nombre_archivo_r = ''; 
+            $ext_r='';
         }
+        
+        mysqli_query($conn, "INSERT INTO Archivos (Seccion, Codigo, SubCodigo, Nombre, Subtitulo, Url_d, Archivo_r, Extension_r, FechaUpdate)
+                                            VALUES ('".$_POST["seccion"]."', '".$_POST["codigo"]."', '".$_POST["subcodigo"]."', 
+                                                    '".$_POST["titulo"]."', '".$_POST["subtitulo"]."', '".$_POST["dirdocumento"]."', 
+                                                    '".$nombre_archivo_r."', '".$ext_r[1]."', '".date("Y-m-d")."')") or die(mysqli_error($conn));
+
+        $mensaje='<div class="mesaje" id="mesaje"><i class="fas fa-thumbs-up"></i> Se agrego '.$_POST["titulo"].' satisfactoriamente'.$error.'</div>';
+        
+    }
+    //editar archivo
+    if($_POST["hacer"]=='editfile')
+    {
+        //carga el archivo
+        if(isset($_FILES['filer']) AND $_FILES['filer']!=NULL)
+        {
+            $nombre_archivo_r =$_FILES['filer']['name']; 
+
+            $ext_r=explode('.', $nombre_archivo_r);
+
+            if (is_uploaded_file($_FILES['filer']['tmp_name']))
+            { 
+                if(copy($_FILES['filer']['tmp_name'], '../files/'.$_POST["seccion"].'/'.$nombre_archivo_r))
+                {
+                    $copyfile=1;
+                }
+                else
+                {
+                    $copyfile=2;
+                    $error=', no se pudo cargar el archivo '.$nombre_archivo_r;
+                }
+            }
+            else
+            {
+                $copyfile=3;
+                $error=', no se pudo cargar el archivo '.$nombre_archivo_r;
+            }
+        }
+        else
+        {
+            $nombre_archivo_r = ''; 
+            $ext_r='';
+        }
+        
+        mysqli_query($conn, "UPDATE Archivos SET Codigo='".$_POST["codigo"]."', 
+                                                    SubCodigo='".$_POST["subcodigo"]."', 
+                                                    Nombre='".$_POST["titulo"]."', 
+                                                    Subtitulo='".$_POST["subtitulo"]."', 
+                                                    Url_d='".$_POST["dirdocumento"]."', 
+                                                    Archivo_r='".$nombre_archivo_r."', 
+                                                    Extension_r='".$ext_r[1]."', 
+                                                    FechaUpdate='".date("Y-m-d")."'
+                                            WHERE Id='".$_POST["idfile"]."'") or die(mysqli_error($conn));
+
+        $mensaje='<div class="mesaje" ><i class="fas fa-thumbs-up"></i> Se actualizo '.$_POST["titulo"].' satisfactoriamente.'.$error.'</div>';
+        
     }
 }
 
@@ -86,7 +135,7 @@ while($RResFiles=mysqli_fetch_array($ResFiles))
                         <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle">'.$RResFiles["Nombre"].'</td>
                         <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle">'.$RResFiles["Url_d"].'</td>
                         <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle">'.$RResFiles["Archivo_r"].'</td>
-                        <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle"><a href="javascript:void(0)"><i class="fa-solid fa-pen"></i></a></td>
+                        <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle"><a href="javascript:void(0)" onclick="limpiar(); abrirmodal(); edit_file(\''.$RResFiles["Id"].'\')"><i class="fa-solid fa-pen"></i></a></td>
                         <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle"><a href="javascript:void(0)"><i class="fa-solid fa-trash"></i></a></td>
                     </tr>';
 
@@ -100,3 +149,10 @@ $cadena.='    </tbody>
         </div>';
 
 echo $cadena;
+?>
+<script>
+//mostrar mensaje despues de los cambios
+setTimeout(function() { 
+    $('#mesaje').fadeOut('fast'); 
+}, 1000)
+</script>
