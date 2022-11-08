@@ -100,7 +100,7 @@ if(isset($_POST["hacer"]))
                                                     FechaUpdate='".date("Y-m-d")."'
                                             WHERE Id='".$_POST["idfile"]."'") or die(mysqli_error($conn));
 
-        $mensaje='<div class="mesaje" ><i class="fas fa-thumbs-up"></i> Se actualizo '.$_POST["titulo"].' satisfactoriamente.'.$error.'</div>';
+        $mensaje='<div class="mesaje" id="mesaje"><i class="fas fa-thumbs-up"></i> Se actualizo '.$_POST["titulo"].' satisfactoriamente.'.$error.'</div>';
         
     }
 }
