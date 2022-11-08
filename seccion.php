@@ -51,6 +51,8 @@ while($RResFiles=mysqli_fetch_array($ResFiles))
         elseif($RResFiles["Extension_r"]=='pdf'){$ico='<i class="fa-solid fa-file-pdf" style="color:#ad0b00"></i>';}
 
         $archivo='<a href="files/'.$_POST["seccion"].'/'.$RResFiles["Archivo_r"].'" target="_blank">'.$ico.'</a>';
+
+        if($RResFiles["Extension_r"]=='' OR $RResFiles["Extension_r"]==NULL){$archivo='';}
     }
     $cadena.='      <tr style="background: '.$bgcolor.'" id="row_'.$J.'">
                         <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle">'.$J.'</td>
@@ -64,7 +66,7 @@ while($RResFiles=mysqli_fetch_array($ResFiles))
     if($bgcolor=="#ffffff"){$bgcolor="#cccccc";}
     elseif($bgcolor=="#cccccc"){$bgcolor="#ffffff";}
                 
-    $J++;
+    $J++; $archivo='';
 }
 $cadena.='  </tbody>
             </table>

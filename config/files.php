@@ -19,7 +19,7 @@ if(isset($_POST["hacer"]))
     if($_POST["hacer"]=='adfile')
     {
         //carga el archivo
-        if($_FILES['filer']!='')
+        if($_FILES['filer']['name']!='' AND $_FILES['filer']['name']!=NULL)
         {
             $nombre_archivo_r =$_FILES['filer']['name']; 
 
@@ -61,7 +61,7 @@ if(isset($_POST["hacer"]))
     if($_POST["hacer"]=='editfile')
     {
         //carga el archivo
-        if(isset($_FILES['filer']) AND $_FILES['filer']!=NULL)
+        if($_FILES['filer']['name']!='' AND $_FILES['filer']['name']!=NULL)
         {
             $nombre_archivo_r =$_FILES['filer']['name']; 
 
