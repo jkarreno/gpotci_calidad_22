@@ -1,5 +1,6 @@
 <?php
 include('../conexion.php');
+include('../funciones.php');
 
 $ResSeccion=mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM secciones WHERE Id='".$_POST["seccion"]."' LIMIT 1"));
 
@@ -117,6 +118,7 @@ $cadena=$mensaje.'<div class="c100" style="display: flex; flex-wrap:wrap;">
                     <tr>
                         <th align="center" class="textotitable">#</th>
                         <th align="center" class="textotitable">Código</th>
+                        <th align="center" class="textotitable">Actualizado</th>
                         <th align="center" class="textotitable">Documento</th>
                         <th align="center" class="textotitable">Url documento</th>
                         <th align="center" class="textotitable">Archivo</th>
@@ -132,9 +134,10 @@ while($RResFiles=mysqli_fetch_array($ResFiles))
     $cadena.='      <tr style="background: '.$bgcolor.'" id="row_'.$J.'">
                         <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle">'.$J.'</td>
                         <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle">'.$RResFiles["Codigo"].'</td>
-                        <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle">'.$RResFiles["Nombre"].'</td>
-                        <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle">'.$RResFiles["Url_d"].'</td>
-                        <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle">'.$RResFiles["Archivo_r"].'</td>
+                        <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle">'.fechados($RResFiles["FechaUpdate"]).'</td>
+                        <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="left" class="texto" valign="middle">'.$RResFiles["Nombre"].'</td>
+                        <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="left" class="texto" valign="middle">'.$RResFiles["Url_d"].'</td>
+                        <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="left" class="texto" valign="middle">'.$RResFiles["Archivo_r"].'</td>
                         <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle"><a href="javascript:void(0)" onclick="limpiar(); abrirmodal(); edit_file(\''.$RResFiles["Id"].'\')"><i class="fa-solid fa-pen"></i></a></td>
                         <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle"><a href="javascript:void(0)"><i class="fa-solid fa-trash"></i></a></td>
                     </tr>';

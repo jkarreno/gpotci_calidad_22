@@ -1,5 +1,6 @@
 <?php
 include("conexion.php");
+include("funciones.php");
 
 $ResSeccion=mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM secciones WHERE Id='".$_POST["seccion"]."' LIMIT 1"));
 
@@ -32,6 +33,7 @@ $cadena.='<div class="c100" style="display: flex; flex-wrap:wrap;">
                 <tr>
                     <th align="center" class="textotitable">#</th>
                     <th align="center" class="textotitable">Codigo</th>
+                    <th align="center" class="textotitable">Actualizado</th>
                     <th align="center" class="textotitable">Titulo</th>
                     <th align="center" class="textotitable">&nbsp;</th>
                     <th align="center" class="textotitable">&nbsp;</th>
@@ -53,7 +55,8 @@ while($RResFiles=mysqli_fetch_array($ResFiles))
     $cadena.='      <tr style="background: '.$bgcolor.'" id="row_'.$J.'">
                         <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle">'.$J.'</td>
                         <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle">'.$RResFiles["Codigo"].'</td>
-                        <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle">'.$RResFiles["Nombre"].'</td>
+                        <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle">'.fechados($RResFiles["FechaUpdate"]).'</td>
+                        <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="left" class="texto" valign="middle">'.$RResFiles["Nombre"].'</td>
                         <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle"><a href="'.$RResFiles["Url_d"].'" target="_blank"><i class="fa-solid fa-file-pdf" style="color:#ad0b00"></i></a></td>
                         <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle">'.$archivo.'</td>
                     </tr>';
