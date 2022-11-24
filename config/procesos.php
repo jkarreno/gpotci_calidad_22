@@ -6,9 +6,17 @@ if(isset($_POST["hacer"]))
 {
     if($_POST["hacer"]=='addproceso')
     {
-        $ResO=mysqli_fetch_array(mysqli_query($conn, "SELECT Orden FROM secciones WHERE Tipo='P' ORDER BY Orden DESC LIMIT 1"));
+        $ResO=mysqli_fetch_array(mysqli_query($conn, "SELECT Orden, Depende FROM secciones WHERE Tipo='P' AND Depende='".$_POST["depende"]."' ORDER BY Orden DESC LIMIT 1"));
 
-        $orden=$ResO["Orden"]+1000;
+        if($ResO["Depende"]==0)
+        {
+            $orden=$ResO["Orden"]+1000;
+        }
+        else
+        {
+            $orden=$ResO["Orden"];
+            $orden++;
+        }
 
         mysqli_query($conn, "INSERT INTO secciones (Orden, Nombre, Tipo, Depende) VALUES ('".$orden."', '".$_POST["proceso"]."', 'P', '".$_POST["depende"]."')") or die(mysqli_error($conn));
 
@@ -108,15 +116,16 @@ while($RResProcesos=mysqli_fetch_array($ResProcesos))
 
     $J++; $A++;
     
-    $ResSubProcesos=mysqli_query($conn, "SELECT * FROM secciones WHERE Tipo='P' AND Depende='".$RResProcesos["Id"]."' ORDER BY Nombre ASC");
+    $ResSubProcesos=mysqli_query($conn, "SELECT * FROM secciones WHERE Tipo='P' AND Depende='".$RResProcesos["Id"]."' ORDER BY Orden ASC");
     if(mysqli_num_rows($ResSubProcesos)>0)
     {
+        $numsubpro=mysqli_num_rows($ResSubProcesos); $K=1;
         while($RResSP=mysqli_fetch_array($ResSubProcesos))
         {
             $cadena.='<tr style="background: '.$bgcolor.'" id="row_'.$T.'">
                         <td onmouseover="row_'.$T.'.style.background=\'#badad8\'" onmouseout="row_'.$T.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle"></td>
-                        <td onmouseover="row_'.$T.'.style.background=\'#badad8\'" onmouseout="row_'.$T.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle"><i class="fa-solid fa-caret-up"></i></td>
-                        <td onmouseover="row_'.$T.'.style.background=\'#badad8\'" onmouseout="row_'.$T.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle"><i class="fa-solid fa-caret-down"></i></td>
+                        <td onmouseover="row_'.$T.'.style.background=\'#badad8\'" onmouseout="row_'.$T.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle">';if($K>1){$cadena.='<a href="javascript:void(0)" onclick="nivel(\''.$RResSP["Id"].'\', \'sube\')"><i class="fa-solid fa-caret-up"></i></a>';}$cadena.='</td>
+                        <td onmouseover="row_'.$T.'.style.background=\'#badad8\'" onmouseout="row_'.$T.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle">';if($K<$numsubpro){$cadena.='<a href="javascript:void(0)" onclick="nivel(\''.$RResSP["Id"].'\', \'baja\')"><i class="fa-solid fa-caret-down"></i></a>';}$cadena.='</td>
                         <td onmouseover="row_'.$T.'.style.background=\'#badad8\'" onmouseout="row_'.$T.'.style.background=\''.$bgcolor.'\'" align="left" class="texto" valign="middle"><i class="fa-solid fa-folder-tree itree"></i> '.$RResSP["Nombre"].'</td>
                         <td onmouseover="row_'.$T.'.style.background=\'#badad8\'" onmouseout="row_'.$T.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle"><a href="javascript:void(0)" onclick="edit_proceso(\''.$RResSP["Id"].'\')"><i class="fa-solid fa-pen"></i></a></td>
                         <td onmouseover="row_'.$T.'.style.background=\'#badad8\'" onmouseout="row_'.$T.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle"><a href="javascript:void(0)" onclick="files(\''.$RResSP["Id"].'\')"><i class="fa-solid fa-file-arrow-up"></i></a></td>
@@ -126,7 +135,7 @@ while($RResProcesos=mysqli_fetch_array($ResProcesos))
             if($bgcolor=="#ffffff"){$bgcolor="#cccccc";}
             elseif($bgcolor=="#cccccc"){$bgcolor="#ffffff";}
             
-            $T++;
+            $T++; $K++;
         }
     }
 }
