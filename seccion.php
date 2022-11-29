@@ -31,7 +31,6 @@ $cadena.='<div class="c100" style="display: flex; flex-wrap:wrap;">
             <table>
             <thead>
                 <tr>
-                    <th align="center" class="textotitable">#</th>
                     <th align="center" class="textotitable">Codigo</th>
                     <th align="center" class="textotitable">Actualizado</th>
                     <th align="center" class="textotitable">Titulo</th>
@@ -55,7 +54,6 @@ while($RResFiles=mysqli_fetch_array($ResFiles))
         if($RResFiles["Extension_r"]=='' OR $RResFiles["Extension_r"]==NULL){$archivo='';}
     }
     $cadena.='      <tr style="background: '.$bgcolor.'" id="row_'.$J.'">
-                        <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle">'.$J.'</td>
                         <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle">'.$RResFiles["Codigo"].'</td>
                         <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle">'.fechados($RResFiles["FechaUpdate"]).'</td>
                         <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="left" class="texto" valign="middle">'.$RResFiles["Nombre"].'</td>
