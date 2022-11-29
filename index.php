@@ -14,7 +14,7 @@
 		<div class="body"></div>
 		<div class="grad"></div>
 		<div class="header">
-			<div><img src="images/logo.png" border="0"></div>
+			<div><img src="images/logo_3.png" border="0"></div>
 		</div>
 		<br>
 		<div class="login">
@@ -23,6 +23,9 @@
 				<input type="password" placeholder="Contraseña" name="password"><br>
 				<input type="submit" value="Ingresar">
 			</form>
+		</div>
+		<div class="update">
+			<p>Ultima revisión<br /><strong>01 . dic . 2022</strong></p>
 		</div>
 	</body>
 </html>
