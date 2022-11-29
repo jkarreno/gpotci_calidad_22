@@ -1,7 +1,7 @@
 <?php
 include("conexion.php");
 
-$ResCategorias=mysqli_query($conn, "SELECT * FROM secciones WHERE Tipo='C' AND Depende='0' ORDER BY Id ASC");
+$ResCategorias=mysqli_query($conn, "SELECT * FROM secciones WHERE Tipo='C' AND Depende='0' ORDER BY Orden ASC");
 
 $cadena='<div class="c100" style="display: flex; flex-wrap:wrap;">';
 while($RResCat=mysqli_fetch_array($ResCategorias))

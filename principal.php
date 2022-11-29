@@ -60,7 +60,7 @@ include ("funciones.php");
 
 	<div class="menu_principal">
 		<?php 
-			$ResProcesos=mysqli_query($conn, "SELECT * FROM secciones WHERE Tipo='P' AND Depende='0' ORDER BY Nombre ASC");
+			$ResProcesos=mysqli_query($conn, "SELECT * FROM secciones WHERE Tipo='P' AND Depende='0' ORDER BY Orden ASC");
 			while($RResProcesos=mysqli_fetch_array($ResProcesos))
 			{
 				echo '<div><p style="display: block"><a href="#" onclick="seccion(\''.$RResProcesos["Id"].'\')"><i class="fa-solid fa-folder-closed" style="margin-right: 10px"></i>'.$RResProcesos["Nombre"].'</a></p></div>';
