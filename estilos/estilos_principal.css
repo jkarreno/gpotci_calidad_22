@@ -45,6 +45,19 @@ header{
 			color: #0297cc;
 		}
 
+		#head_menu{
+			width: 100px;
+		}
+		#head_bienvenido{
+			width: calc(100% - 553px); 
+		}
+		#head_buscar{
+			width: 300px;
+		}
+		#head_logo{
+			width: 153px;
+		}
+
 .menu_principal{
 	position: absolute;
 	margin-top: 80px;
@@ -232,3 +245,28 @@ label #chk_btn{
 	}
 
 
+/*responsivo*/
+@media only screen and (max-width:1100px){
+	#head_bienvenido{
+		display: none;
+	}
+	#head_buscar{
+		width: calc(100% - 253px);
+	}
+}
+@media only screen and (max-width:560px){
+	#head_logo{
+		display: none;
+	}
+	#head_buscar{
+		width: calc(100% - 100px);
+	}
+}
+@media only screen and (max-width:400px){
+	#head_menu{
+		width: 70px;
+	}
+	#head_buscar{
+		width: calc(100% - 70px);
+	}
+}

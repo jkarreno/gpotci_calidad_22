@@ -825,6 +825,11 @@ table {
         flex-direction: column;
     }
 }
+@media only screen and (max-width:560px){
+	.documento{
+        display: none;
+    }
+}
 /*Datos bitacoro*/
 .dat-bit{
     width: 500px;

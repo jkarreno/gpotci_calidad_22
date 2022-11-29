@@ -35,7 +35,7 @@ $cadena.='<div class="c100" style="display: flex; flex-wrap:wrap;">
                     <th align="center" class="textotitable">Actualizado</th>
                     <th align="center" class="textotitable">Titulo</th>
                     <th align="center" class="textotitable">&nbsp;</th>
-                    <th align="center" class="textotitable">&nbsp;</th>
+                    <th align="center" class="textotitable documento">&nbsp;</th>
                 </tr>
             </thead>
             <tbody>';
@@ -58,7 +58,7 @@ while($RResFiles=mysqli_fetch_array($ResFiles))
                         <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle">'.fechados($RResFiles["FechaUpdate"]).'</td>
                         <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="left" class="texto" valign="middle">'.$RResFiles["Nombre"].'</td>
                         <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle"><a href="'.$RResFiles["Url_d"].'" target="_blank"><i class="fa-solid fa-file-pdf" style="color:#ad0b00"></i></a></td>
-                        <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto" valign="middle">'.$archivo.'</td>
+                        <td onmouseover="row_'.$J.'.style.background=\'#badad8\'" onmouseout="row_'.$J.'.style.background=\''.$bgcolor.'\'" align="center" class="texto documento" valign="middle">'.$archivo.'</td>
                     </tr>';
 
     if($bgcolor=="#ffffff"){$bgcolor="#cccccc";}
