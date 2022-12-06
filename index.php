@@ -25,7 +25,7 @@
 			</form>
 		</div>
 		<div class="update">
-			<p>Ultima revisión<br /><strong>01 . dic . 2022</strong></p>
+			<p>Restructuración de la plataforma<br /><strong>01 . dic . 2022</strong></p>
 		</div>
 	</body>
 </html>
