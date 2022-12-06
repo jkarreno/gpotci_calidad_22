@@ -48,7 +48,7 @@ include ("funciones.php");
 	<input type="checkbox" id="check">
 	<header>
 		<div class="menu_bar" id="head_menu"><label for="check" id="chk_btn"><i class="fas fa-bars"></i></label></div>
-		<div class="logo_img" id="head_bienvenido"><i class="fa-solid fa-user-tie" style="margin-right: 20px"></i> Bienvenido <?php echo $_SESSION["nombre"];?></div>
+		<div class="logo_img" id="head_bienvenido"><i class="fa-solid fa-user-tie" style="margin-right: 20px"></i> Bienvenido <?php echo $_SESSION["nombre"];?><?php if($_SESSION["tipo"]==1){echo '&nbsp;&nbsp;<a href="#" onclick="configuracion(\'0\')"><i class="fa-solid fa-screwdriver-wrench"></i></a>';}?></div>
 		<div class="logo_img" id="head_buscar">
 			<form id="fbuscar" name="fbuscar" style="display:inline;">
 				<input id="namanyay-search-box" name="q" size="40" type="text" placeholder=""/>
@@ -66,7 +66,6 @@ include ("funciones.php");
 				echo '<div onclick="seccion(\''.$RResProcesos["Id"].'\')"><p style="display: block"><a href="#"><i class="fa-solid fa-folder-closed" style="margin-right: 10px"></i>'.$RResProcesos["Nombre"].'</a></p></div>';
 			}
 		?>
-		<div onclick="configuracion('0')"><a href="#"><i class="fa-solid fa-screwdriver-wrench"></i> Configuración</a></div>
 		<div onclick="location='logout.php'"><p style="display: block"><a href="#"><i class="fas fa-sign-out-alt"></i> Salir</a></p></div>
 	</div>
 

@@ -19,6 +19,7 @@ if (mysqli_num_rows($rs)!=0){
     $_SESSION["autentificado"] = "SI"; 
     $_SESSION["nombre"] = $Rowrs["Nombre"];
     $_SESSION["Id"] = $Rowrs["Id"];
+    $_SESSION["tipo"] = $Rowrs["Tipo"];
  //    sesion_register("usuario");
 //    $usuario = $username;
 	
