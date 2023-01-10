@@ -5,7 +5,7 @@ include("../conexion.php");
 $cadena='<div class="c100" style="display: flex;">
             <div class="titulos_top" onclick="procesos()"><i class="fa-solid fa-folder"></i> Procesos</div>
             <div class="titulos_top" onclick="categorias()"><i class="fa-solid fa-folder"></i> Categorias</div>
-            <div class="titulos_top" onclick="area(\'0\', \'1\')"><i class="fa-solid fa-users"></i> Usuarios</div>
+            <div class="titulos_top" onclick="usuarios()"><i class="fa-solid fa-users"></i> Usuarios</div>
             <div class="titulos_top" onclick="area(\'0\', \'10\')"><i class="fa-solid fa-book"></i> Bitacora</div>
         </div>
         
@@ -130,6 +130,16 @@ function edit_file(file){
                 data: 'file=' + file
 	}).done (function ( info ){
 		$('#modal-body').html(info);
+	});
+}
+
+//usuarios
+function usuarios(){
+	$.ajax({
+				type: 'POST',
+				url : 'config/usuarios.php'
+	}).done (function ( info ){
+		$('#conteni2').html(info);
 	});
 }
 </script>
